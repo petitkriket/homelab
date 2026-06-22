@@ -1,0 +1,6 @@
+# Talos secrets — never commit
+secrets.yaml
+talosconfig
+kubeconfig
+controlplane.yaml
+worker.yaml
