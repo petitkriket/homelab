@@ -24,7 +24,7 @@ helm repo update
 cd ~/homelab
 helm install argocd argo/argo-cd \
   --namespace argocd --create-namespace \
-  --values argocd/values.yaml \
+  --values talos/argocd/values.yaml \
   --wait --timeout 5m
 ```
 
@@ -54,7 +54,7 @@ Login : `admin` / mot de passe de l'étape 3.
 helm repo update
 helm upgrade argocd argo/argo-cd \
   --namespace argocd \
-  --values argocd/values.yaml \
+  --values talos/argocd/values.yaml \
   --wait
 ```
 
