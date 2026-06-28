@@ -51,3 +51,7 @@ qm start/stop/reset <id> # Contrôler VM
 qm config <id>           # Voir config VM
 pvesh get /nodes          # Infos noeud
 ```
+
+## Scripts
+
+- Community Scripts : https://community-scripts.org/scripts?filter=popular
