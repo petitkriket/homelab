@@ -1,0 +1,18 @@
+api:
+  dashboard: true
+ingressRoute:
+  dashboard:
+    enabled: true
+    matchRule: PathPrefix(`/dashboard`) || PathPrefix(`/api`)
+    entryPoints:
+      - traefik
+providers:
+  kubernetesGateway:
+    enabled: true
+gateway:
+  listeners:
+    web:
+      namespacePolicy:
+        from: All
+deployment:
+  replicas: 2
