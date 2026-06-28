@@ -111,13 +111,29 @@ Changer boot order → scsi0 en premier. Vérifier :
 KUBECONFIG=~/homelab/kubeconfig kubectl get nodes
 ```
 
-## 6. Monitoring avec k9s
+## 6. Appliquer l'image avec extensions (tous les nœuds)
+
+L'ISO boot le nœud mais n'installe pas les extensions du schematic. Il faut upgrader chaque nœud vers l'image factory qui les inclut (`iscsi-tools`, `util-linux-tools`, `qemu-guest-agent`).
+
+```bash
+talosctl --talosconfig=./talosconfig -e 192.168.1.50 -n <IP_DU_NOEUD> upgrade --image factory.talos.dev/installer/88d1f7a5c4f1d3aba7df787c448c1d3d008ed29cfb34af53fa0df4336a56040b:v1.13.4
+```
+
+Répéter pour chaque nœud (CP + workers). Vérifier :
+
+```bash
+talosctl --talosconfig=./talosconfig -e 192.168.1.50 -n <IP_DU_NOEUD> get extensions
+```
+
+Doit afficher `iscsi-tools`, `util-linux-tools`, `qemu-guest-agent`.
+
+## 7. Monitoring avec k9s
 
 ```bash
 KUBECONFIG=~/homelab/kubeconfig k9s
 ```
 
-## 7. Rebuild from scratch
+## 8. Rebuild from scratch
 
 Si tout est perdu sauf `secrets.yaml` + patches :
 
@@ -126,7 +142,7 @@ Si tout est perdu sauf `secrets.yaml` + patches :
 # Puis reprendre depuis §4 (CP) puis §5 (workers)
 ```
 
-## 8. Régénérer talosconfig / kubeconfig
+## 9. Régénérer talosconfig / kubeconfig
 
 ```bash
 # talosconfig (besoin de secrets.yaml)
